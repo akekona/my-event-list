@@ -96,9 +96,17 @@ export default new Vuex.Store({
       try {
         if (this.state.userId !== null) {
           const userId = this.state.userId;
-          const events = await axios.get(`${baseURL}/events/${userId}/`);
-          console.log("retrieving store", events.data);
-          commit("setEventList", events.data);
+          let events = await axios.get(`${baseURL}/events/${userId}/`);
+          let sorted = await events.data.sort((a, b) => {
+            const aDate = new Date(a.date);
+            const bDate = new Date(b.date);
+            if (aDate === bDate) {
+              return a.time - b.time;
+            }
+            return aDate - bDate;
+          });
+          console.log("retrieving store", sorted);
+          commit("setEventList", sorted);
         }
       } catch (err) {
         console.error("Error retrieve event list", err);
