@@ -1,9 +1,11 @@
 const knex = require("knex");
 const conn = require("./knexfile");
 
+const nodeEnv = process.env.NODE_ENV;
+
 const db = knex({
   client: "pg",
-  connection: conn.process.env.NODE_ENV.connection,
+  connection: conn[nodeEnv].connection,
 });
 
 module.exports = db;
