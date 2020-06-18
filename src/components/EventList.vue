@@ -1,9 +1,12 @@
 <template>
   <div class="eventList">
     <button @click="logout">Logout</button>
-
+    <NewEvent />
     <h1>Upcoming Events</h1>
-    <p v-if="eventList.length === 0">No events in your EVENT LIST</p>
+    <div v-if="eventList.length === 0">
+      <p>There are currently no events in your EVENT LIST.</p>
+      <p>Add a new event reminder to get started!</p>
+    </div>
     <EventCard
       v-for="event in eventList"
       :key="event.event_id"
@@ -14,12 +17,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import NewEvent from "./NewEvent";
 import EventCard from "./EventCard";
+import { mapState } from "vuex";
 
 export default {
   name: "EventList",
   components: {
+    NewEvent,
     EventCard,
   },
   computed: mapState(["eventList"]),
