@@ -56,7 +56,6 @@ export default {
         username: this.username,
         password: this.password,
       };
-      console.log(newUser);
       const registered = await this.$store.dispatch("register", { newUser });
       if (registered) {
         const username = newUser.username;

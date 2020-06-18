@@ -47,7 +47,6 @@ export default {
         location: this.location,
       };
       const userId = this.$store.state.userId;
-      console.log(userId);
       axios
         .post(
           `${process.env.VUE_APP_API_BASE_URL}/api/events/${userId}/`,
@@ -63,7 +62,7 @@ export default {
           }
         })
         .catch((err) => {
-          console.log("Error adding new event", err);
+          console.error("Error adding new event", err);
         });
     },
     resetForm(event) {

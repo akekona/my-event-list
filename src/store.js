@@ -5,7 +5,6 @@ import persistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 const baseURL = process.env.VUE_APP_API_BASE_URL;
-console.log("baseURL", baseURL);
 
 export default new Vuex.Store({
   plugins: [
@@ -52,7 +51,6 @@ export default new Vuex.Store({
   actions: {
     async login({ commit }, credentials) {
       try {
-        console.log(credentials);
         const username = credentials.username;
         const pass = credentials.password;
         const rawUser = await axios.get(`${baseURL}/api/users/${username}/`);
@@ -85,7 +83,6 @@ export default new Vuex.Store({
         const user = credentials.newUser;
         const newEntry = await axios.post(`${baseURL}/api/users/`, user);
         if (newEntry.data.rowCount > 0) {
-          console.log("registered", user);
           commit("setLoggedIn", true);
           return true;
         }
@@ -106,7 +103,6 @@ export default new Vuex.Store({
             }
             return aDate - bDate;
           });
-          console.log("retrieving store", sorted);
           commit("setEventList", sorted);
         }
       } catch (err) {

@@ -7,15 +7,16 @@ const db = require("./knex");
 
 const app = express();
 const port = process.env.PORT || 3000;
-app.use(serveStatic(path.join(__dirname, "dist")));
 
 //middleware
+app.use(serveStatic(path.resolve(__dirname, "..", "..", "dist")));
+console.log(path.resolve(__dirname, "..", "..", "dist"));
 app.use(bodyParser.json());
 app.use(cors());
 
 async function validateUsername(username) {
   try {
-    console.log("checking username");
+    // console.log("checking username");
     const userList = db
       .select("username")
       .table("users")

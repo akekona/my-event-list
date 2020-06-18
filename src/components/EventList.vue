@@ -12,7 +12,6 @@
       :key="event.event_id"
       :event="event"
     />
-    <!-- <button @click="test">Check event list</button> -->
   </div>
 </template>
 
@@ -38,7 +37,7 @@ export default {
     },
     retrieveEvents() {
       this.$store.dispatch("retrieveEvents").then(() => {
-        console.log(this.$store.state.eventList);
+        // console.log(this.$store.state.eventList);
         this.eventList = this.$store.state.eventList;
       });
     },

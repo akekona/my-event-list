@@ -61,12 +61,12 @@ export default {
           location: this.location,
         };
         const eventId = this.event.event_id;
-        console.log("event to update", updatedEvent);
+        // console.log("event to update", updatedEvent);
         const updated = await axios.put(
           `${process.env.VUE_APP_API_BASE_URL}/api/events/${eventId}/`,
           updatedEvent
         );
-        console.log(updated);
+        return updated;
       } catch (err) {
         console.log("Error adding new event", err);
       }

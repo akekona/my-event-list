@@ -57,7 +57,7 @@ export default {
       const deleted = await axios.delete(
         `${process.env.VUE_APP_API_BASE_URL}/api/events/${eventId}/`
       );
-      console.log(deleted);
+      return deleted;
     },
     async updateAfterDelete() {
       const userId = this.$store.state.userId;
