@@ -1,11 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import persistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 const baseURL = process.env.VUE_APP_API_BASE_URL;
 
 export default new Vuex.Store({
+  plugins: [
+    persistedState({
+      storage: window.sessionStorage,
+    }),
+  ],
   state: {
     loggedIn: false,
     username: null,

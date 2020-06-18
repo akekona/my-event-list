@@ -42,20 +42,14 @@ import axios from "axios";
 
 export default {
   name: "UpdatedEvent",
-  props: ["event", "editting"],
+  props: ["event", "editting", "calendarDate"],
   data() {
     return {
-      eventName: event.eventName,
-      date: event.date,
-      time: event.time,
-      location: event.location,
+      eventName: this.event.event_name,
+      date: this.calendarDate,
+      time: this.event.time,
+      location: this.event.location,
     };
-  },
-  beforeMount() {
-    this.eventName = this.event.event_name;
-    this.date = this.event.date;
-    this.time = this.event.time;
-    this.location = this.event.location;
   },
   methods: {
     async updateDatabase() {

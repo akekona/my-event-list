@@ -1,7 +1,7 @@
 <template>
   <div class="eventCard">
-    <h3 id="date">{{ event.date }}</h3>
-    <h3 id="time">{{ event.time }}</h3>
+    <h3 id="date">{{ displayDate }}</h3>
+    <h3 id="time">{{ displayTime }}</h3>
     <h2 id="eventName">{{ event.event_name }}</h2>
     <h3 id="location">{{ event.location }}</h3>
     <button @click="toggleEditView">
@@ -13,6 +13,7 @@
       v-if="editting === true"
       :editting="editting"
       :event="event"
+      :calendarDate="calendarDate"
       v-on:update:editting="closeEditView"
     />
   </div>
@@ -21,6 +22,7 @@
 <script>
 import axios from "axios";
 import UpdatedEvent from "./UpdatedEvent";
+import moment from "moment";
 
 export default {
   name: "EventCard",
@@ -31,7 +33,17 @@ export default {
   data() {
     return {
       editting: false,
+      calendarDate: "",
+      displayDate: "",
+      displayTime: "",
     };
+  },
+  beforeMount() {
+    this.calendarDate = moment(this.event.date).format("YYYY-MM-DD");
+    this.displayDate = moment(this.event.date).format("ddd MMM DD, YYYY");
+    const dateNoTime = this.event.date.slice(0, 11);
+    const timeNoSec = this.event.time.slice(0, 5);
+    this.displayTime = moment(dateNoTime + timeNoSec).format("LT");
   },
   methods: {
     toggleEditView() {
