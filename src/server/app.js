@@ -121,6 +121,53 @@ app.post("/api/users/", async (req, res) => {
   }
 });
 
+app.put("/api/events/:id/", async (req, res) => {
+  try {
+    const updatedEvent = req.body;
+    let eventId = req.params.id;
+    const event = await db("events")
+      .where("event_id", eventId)
+      .update({
+        event_name: updatedEvent.eventName,
+        date: updatedEvent.date,
+        time: updatedEvent.time,
+        location: updatedEvent.location,
+      });
+    res.send(event);
+  } catch (err) {
+    res.sendStatus(400);
+    console.error("Error updating event", err);
+  }
+});
+
+app.delete("/api/events/:id/", async (req, res) => {
+  try {
+    let eventId = req.params.id;
+    const deletedEvent = await db("events")
+      .del()
+      .where("event_id", eventId);
+    res.sendStatus(204);
+    res.send(deletedEvent);
+  } catch (err) {
+    res.sendStatus(404);
+    console.error("Error deleting event", err);
+  }
+});
+
+app.delete("/api/users/:id/", async (req, res) => {
+  try {
+    let userId = req.params.id;
+    const deletedUser = await db("users")
+      .del()
+      .where("user_id", userId);
+    res.sendStatus(204);
+    res.send(deletedUser);
+  } catch (err) {
+    res.sendStatus(404);
+    console.error("Error deleting user", err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
