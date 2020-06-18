@@ -3,7 +3,7 @@ const config = require("./config");
 module.exports = {
   development: {
     client: "pg",
-    connection: process.env.DATABASE_URL || {
+    connection: config.DATABASE_URL || {
       user: config.DB_USERNAME,
       database: config.DB_NAME,
     },
@@ -27,11 +27,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
-    },
+    connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10,
