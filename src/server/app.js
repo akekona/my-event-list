@@ -5,8 +5,7 @@ var cors = require("cors");
 
 const app = express();
 
-require("dotenv").config();
-const port = process.env.VUE_APP_PORT;
+// const port = process.env.VUE_APP_PORT;
 
 //middleware
 app.use(bodyParser.json());
@@ -167,6 +166,6 @@ app.delete("/api/users/:id/", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Listening at http://localhost:${port}`);
+// });
