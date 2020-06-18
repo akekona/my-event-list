@@ -36,6 +36,7 @@ export default {
       let password = this.password;
       console.log(this.password);
       this.$store.dispatch("login", { username, password });
+      this.$router.push("/events");
     },
   },
 };

@@ -1,18 +1,25 @@
 <template>
   <div id="app">
     <Header />
-    <router-view></router-view>
+    <Login v-if="loggedIn === false" />
+    <EventList v-else-if="loggedIn === true" />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
+import Login from "./components/Login";
+import EventList from "./components/EventList";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {
     Header,
+    Login,
+    EventList,
   },
+  computed: mapState(["loggedIn"]),
 };
 </script>
 

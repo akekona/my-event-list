@@ -14,6 +14,14 @@ export default new Vuex.Store({
     lastName: null,
     eventList: [],
   },
+  getters: {
+    getLoggedIn(state) {
+      return state.loggedIn;
+    },
+    getEventList(state) {
+      return state.eventList;
+    },
+  },
   mutations: {
     setLoggedIn(state, loggedIn) {
       state.loggedIn = loggedIn;
@@ -65,6 +73,48 @@ export default new Vuex.Store({
       commit("setUserId", null);
       commit("setFirstName", null);
       commit("setLastName", null);
+    },
+    async register({ commit }, credentials) {
+      try {
+        console.log(credentials);
+        const user = credentials.newUser;
+        const newEntry = await axios.post(`${baseURL}/users/`, user);
+        if (newEntry.rowCount > 0) {
+          console.log("registered", user);
+          commit("setLoggedIn", true);
+          this.login(user);
+        }
+      } catch (err) {
+        console.error("Error creating new user", err);
+      }
+    },
+    async retrieveEvents({ commit }) {
+      try {
+        if (this.state.userId !== null) {
+          const userId = this.state.userId;
+          const events = await axios.get(`${baseURL}/events/${userId}/`);
+          console.log("retrieving store", events.data);
+          commit("setEventList", events.data);
+        }
+      } catch (err) {
+        console.error("Error retrieve event list", err);
+      }
+    },
+    addEvent({ commit }, newEvent) {
+      const updatedEventList = [...this.state.eventList, newEvent];
+      commit("setEventList", updatedEventList);
+      return updatedEventList;
+    },
+    removeEvent({ commit }, eventId) {
+      const updatedEventList = [...this.state.eventList];
+      updatedEventList.map((event, index) => {
+        if (event.event_id === eventId) {
+          updatedEventList.splice(index, 1);
+          return;
+        }
+      });
+      commit("setEventList", updatedEventList);
+      return updatedEventList;
     },
   },
 });
