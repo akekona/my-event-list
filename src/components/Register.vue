@@ -33,7 +33,7 @@
       <input type="submit" value="Register" />
     </form>
     <br />
-    <router-link to="/login">Login</router-link>
+    <router-link to="/">Login</router-link>
   </div>
 </template>
 
