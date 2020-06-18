@@ -3,17 +3,33 @@
     <h2>Create an account</h2>
     <form class="register-form" @submit.prevent="register">
       <label for="firstName">First name:</label>
-      <input type="text" v-model="firstName" id="firstName" name="firstName" />
-      <br />
+      <input
+        type="text"
+        v-model="firstName"
+        id="firstName"
+        name="firstName"
+      /><br />
       <label for="lastName">Last name:</label>
-      <input type="text" v-model="lastName" id="lastName" name="username" />
-      <br />
+      <input
+        type="text"
+        v-model="lastName"
+        id="lastName"
+        name="username"
+      /><br />
       <label for="username">Username:</label>
-      <input type="text" v-model="username" id="username" name="username" />
-      <br />
+      <input
+        type="text"
+        v-model="username"
+        id="username"
+        name="username"
+      /><br />
       <label for="password">Password:</label>
-      <input type="password" v-model="password" id="password" name="password" />
-      <br />
+      <input
+        type="password"
+        v-model="password"
+        id="password"
+        name="password"
+      /><br /><br />
       <input type="submit" value="Register" />
     </form>
     <br />
@@ -32,7 +48,29 @@ export default {
       password: "",
     };
   },
-  methods: {},
+  methods: {
+    async register() {
+      const newUser = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        username: this.username,
+        password: this.password,
+      };
+      console.log(newUser);
+      const registered = await this.$store.dispatch("register", { newUser });
+      if (registered) {
+        const username = newUser.username;
+        const password = newUser.password;
+        const success = await this.$store.dispatch("login", {
+          username,
+          password,
+        });
+        if (success) {
+          this.$router.push("/events");
+        }
+      }
+    },
+  },
 };
 </script>
 

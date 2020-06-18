@@ -21,4 +21,5 @@ export default new VueRouter({
       component: EventList,
     },
   ],
+  mode: "history",
 });

@@ -25,7 +25,9 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      //   this.$router.push("/login");
+      if (!this.$store.state.loggedIn) {
+        this.$router.push("/login");
+      }
     },
     retrieveEvents() {
       this.$store.dispatch("retrieveEvents").then(() => {

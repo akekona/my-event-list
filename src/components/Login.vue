@@ -32,10 +32,16 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       let username = this.username;
       let password = this.password;
-      this.$store.dispatch("login", { username, password });
+      const success = await this.$store.dispatch("login", {
+        username,
+        password,
+      });
+      if (success) {
+        this.$router.push("/events");
+      }
     },
   },
 };

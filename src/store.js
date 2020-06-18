@@ -58,8 +58,7 @@ export default new Vuex.Store({
           commit("setUserId", user.user_id);
           commit("setFirstName", user.first_name);
           commit("setLastName", user.last_name);
-          console.log("completed commits", this.state.loggedIn);
-          console.log("completed commits", this.state.userId);
+          return true;
         } else {
           console.error("Password incorrect");
         }
@@ -76,13 +75,12 @@ export default new Vuex.Store({
     },
     async register({ commit }, credentials) {
       try {
-        console.log(credentials);
         const user = credentials.newUser;
         const newEntry = await axios.post(`${baseURL}/users/`, user);
-        if (newEntry.rowCount > 0) {
+        if (newEntry.data.rowCount > 0) {
           console.log("registered", user);
           commit("setLoggedIn", true);
-          this.login(user);
+          return true;
         }
       } catch (err) {
         console.error("Error creating new user", err);

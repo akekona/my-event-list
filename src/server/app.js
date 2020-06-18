@@ -20,7 +20,6 @@ async function validateUsername(username) {
       .table("users")
       .where("username", username);
     return userList.then((userList) => {
-      console.log(userList);
       return userList;
     });
   } catch (err) {
