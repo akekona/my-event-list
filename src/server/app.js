@@ -132,7 +132,7 @@ app.put("/api/events/:id/", async (req, res) => {
         time: updatedEvent.time,
         location: updatedEvent.location,
       });
-    res.send(event);
+    res.sendStatus(200).send(event);
   } catch (err) {
     res.sendStatus(400);
     console.error("Error updating event", err);

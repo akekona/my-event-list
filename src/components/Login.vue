@@ -48,8 +48,16 @@ export default {
 </script>
 
 <style>
+label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+}
 input {
   margin: 5px;
+  width: 150px;
+  box-sizing: border-box;
+  align-items: right;
 }
 .login {
   border: 1px solid black;

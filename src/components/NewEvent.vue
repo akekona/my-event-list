@@ -1,6 +1,6 @@
 <template>
   <div class="newEvent">
-    <h2>Add new event reminder</h2>
+    <h1>Create a new reminder</h1>
     <form class="event-form" @submit.prevent="addEvent">
       <label for="eventName">Event name:</label>
       <input
@@ -20,7 +20,7 @@
         id="location"
         name="location"
       /><br /><br />
-      <input type="submit" value="Add Event" />
+      <input type="submit" value="Add to my LIST!" />
     </form>
   </div>
 </template>
