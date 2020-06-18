@@ -49,7 +49,10 @@ export default {
       const userId = this.$store.state.userId;
       console.log(userId);
       axios
-        .post(`${process.env.VUE_APP_API_BASE_URL}/events/${userId}/`, event)
+        .post(
+          `${process.env.VUE_APP_API_BASE_URL}/api/events/${userId}/`,
+          event
+        )
         .then((res) => {
           this.$store.dispatch("retrieveEvents", userId);
           return res;

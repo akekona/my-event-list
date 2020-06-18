@@ -55,7 +55,7 @@ export default {
     async deleteEvent() {
       const eventId = this.event.event_id;
       const deleted = await axios.delete(
-        `${process.env.VUE_APP_API_BASE_URL}/events/${eventId}/`
+        `${process.env.VUE_APP_API_BASE_URL}/api/events/${eventId}/`
       );
       console.log(deleted);
     },

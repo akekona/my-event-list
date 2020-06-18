@@ -5,6 +5,7 @@ import persistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 const baseURL = process.env.VUE_APP_API_BASE_URL;
+console.log("baseURL", baseURL);
 
 export default new Vuex.Store({
   plugins: [
@@ -54,7 +55,7 @@ export default new Vuex.Store({
         console.log(credentials);
         const username = credentials.username;
         const pass = credentials.password;
-        const rawUser = await axios.get(`${baseURL}/users/${username}/`);
+        const rawUser = await axios.get(`${baseURL}/api/users/${username}/`);
         const user = await rawUser.data[0];
         console.log("in store login", user.password, pass);
         if (user.password === pass) {
@@ -82,7 +83,7 @@ export default new Vuex.Store({
     async register({ commit }, credentials) {
       try {
         const user = credentials.newUser;
-        const newEntry = await axios.post(`${baseURL}/users/`, user);
+        const newEntry = await axios.post(`${baseURL}/api/users/`, user);
         if (newEntry.data.rowCount > 0) {
           console.log("registered", user);
           commit("setLoggedIn", true);
@@ -96,7 +97,7 @@ export default new Vuex.Store({
       try {
         if (this.state.userId !== null) {
           const userId = this.state.userId;
-          let events = await axios.get(`${baseURL}/events/${userId}/`);
+          let events = await axios.get(`${baseURL}/api/events/${userId}/`);
           let sorted = await events.data.sort((a, b) => {
             const aDate = new Date(a.date);
             const bDate = new Date(b.date);

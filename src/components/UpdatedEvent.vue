@@ -63,7 +63,7 @@ export default {
         const eventId = this.event.event_id;
         console.log("event to update", updatedEvent);
         const updated = await axios.put(
-          `${process.env.VUE_APP_API_BASE_URL}/events/${eventId}/`,
+          `${process.env.VUE_APP_API_BASE_URL}/api/events/${eventId}/`,
           updatedEvent
         );
         console.log(updated);

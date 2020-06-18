@@ -33,7 +33,7 @@ export default {
     logout() {
       this.$store.dispatch("logout");
       if (!this.$store.state.loggedIn) {
-        this.$router.push("/login");
+        this.$router.push("/");
       }
     },
     retrieveEvents() {
