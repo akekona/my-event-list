@@ -3,6 +3,7 @@
     <button @click="logout">Logout</button>
 
     <h1>Upcoming Events</h1>
+    <p v-if="eventList.length === 0">No events in your EVENT LIST</p>
     <EventCard
       v-for="event in eventList"
       :key="event.event_id"
