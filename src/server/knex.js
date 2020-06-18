@@ -1,9 +1,8 @@
 const knex = require("knex");
 const conn = require("./knexfile");
-const config = require("../../vue.config");
+require("dotenv").config();
 
-const nodeEnv = config.NODE_ENV;
-console.log(config);
+const nodeEnv = process.env.NODE_ENV;
 
 const db = knex({
   client: "pg",

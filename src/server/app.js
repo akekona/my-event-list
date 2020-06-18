@@ -5,7 +5,7 @@ var cors = require("cors");
 
 const app = express();
 
-const port = process.env.VUE_APP_PORT || process.env.PORT;
+const port = process.env.PORT || 3000;
 
 //middleware
 app.use(bodyParser.json());
