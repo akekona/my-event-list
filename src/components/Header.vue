@@ -18,6 +18,7 @@ export default {
   border-radius: 2px;
   padding: 3px;
   padding-bottom: 0px;
+  margin-left: 5px;
   width: 180px;
   color: white;
 }

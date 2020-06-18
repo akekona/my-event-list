@@ -30,7 +30,14 @@ export default {
       password: "",
     };
   },
-  methods: {},
+  methods: {
+    login() {
+      let username = this.username;
+      let password = this.password;
+      console.log(this.password);
+      this.$store.dispatch("login", { username, password });
+    },
+  },
 };
 </script>
 
