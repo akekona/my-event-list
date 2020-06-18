@@ -5,10 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "migrate:make": "knex migrate:make --knexfile ./src/server/knexfile.js",
+    "migrate:latest": "knex migrate:latest --knexfile ./src/server/knexfile.js",
+    "migrate:rollback": "knex migrate:rollback --knexfile ./src/server/knexfile.js",
+    "seed:make": "knex seed:make --knexfile ./src/server/knexfile.js",
+    "seed:run": "knex seed:run --knexfile ./src/server/knexfile.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.1",

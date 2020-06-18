@@ -1,9 +1,11 @@
+const config = require("./config");
+
 module.exports = {
   development: {
     client: "pg",
     connection: process.env.VUE_APP_DATABASE_URL || {
-      user: process.env.VUE_APP_USERNAME,
-      database: process.env.VUE_APP_DATABASE_NAME,
+      user: config.DB_USERNAME,
+      database: config.DB_NAME,
     },
     migrations: {
       tableName: "knex_migrations",
