@@ -28,6 +28,7 @@ export default {
     EventCard,
   },
   computed: mapState(["eventList"]),
+
   methods: {
     logout() {
       this.$store.dispatch("logout");
