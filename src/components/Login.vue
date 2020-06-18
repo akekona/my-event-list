@@ -8,16 +8,17 @@
         v-model="username"
         id="username"
         name="username"
-      />
-      <br />
+      /><br />
       <label for="password">Password:</label>
-      <input type="password" v-model="password" id="password" name="password" />
-      <br />
+      <input
+        type="password"
+        v-model="password"
+        id="password"
+        name="password"
+      /><br />
       <input type="submit" value="Login" />
     </form>
-    <router-link id="register-link" to="/register"
-      >Create an account</router-link
-    >
+    <router-link to="/register">Register</router-link>
   </div>
 </template>
 
@@ -34,15 +35,13 @@ export default {
     login() {
       let username = this.username;
       let password = this.password;
-      console.log(this.password);
       this.$store.dispatch("login", { username, password });
-      this.$router.push("/events");
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 input {
   margin: 5px;
 }
