@@ -5,7 +5,7 @@ var cors = require("cors");
 
 const app = express();
 
-// const port = process.env.VUE_APP_PORT;
+const port = process.env.VUE_APP_PORT || process.env.PORT;
 
 //middleware
 app.use(bodyParser.json());
@@ -166,8 +166,6 @@ app.delete("/api/users/:id/", async (req, res) => {
   }
 });
 
-// app.listen(port, () => {
-//   console.log(`Listening at http://localhost:${port}`);
-// });
-
-// module.exports = { app };
+app.listen(port, () => {
+  console.log(`Listening at port:${port}`);
+});
