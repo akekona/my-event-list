@@ -1,14 +1,14 @@
-# My EVENT LIST
+# Create event reminders with My EVENT LIST
 
 <img src="src/assets/logo.png" alt="my EVENT LIST logo" style="width:30%; float:right">
 
-View the live demo here: [LINK to My EVENT LIST](https://myevent-list.herokuapp.com/)
+Link to the live demo! [LINK to My EVENT LIST](https://myevent-list.herokuapp.com/)
 
 ## About
 
 A single page application to add, view, edit, and remove personal event reminders created by the user.  
 A login feature was implemented using vuex state management and session storage.  
-Password encrypted using [bcryptjs](https://www.npmjs.com/package/bcryptjs).
+Passwords are encrypted using [bcryptjs](https://www.npmjs.com/package/bcryptjs).
 
 ## API Endpoints
 
