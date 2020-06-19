@@ -83,10 +83,10 @@ export default new Vuex.Store({
       try {
         const user = credentials.newUser;
         const newEntry = await axios.post(`${baseURL}/api/users/`, user);
-        if (newEntry.data.status === 200) {
+        if (newEntry.status === 200) {
           commit("setLoggedIn", true);
         }
-        return newEntry.data.status;
+        return newEntry.status;
       } catch (err) {
         console.error("Error creating new user", err);
         return err.response.status;
