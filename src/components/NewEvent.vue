@@ -1,6 +1,6 @@
 <template>
   <div class="newEvent">
-    <h1>Create a new reminder</h1>
+    <h1 id="newEventHeading">ADD AN EVENT</h1>
     <form class="event-form" @submit.prevent="addEvent">
       <label for="eventName">Event name:</label>
       <input
@@ -20,7 +20,12 @@
         id="location"
         name="location"
       /><br /><br />
-      <input type="submit" value="Add to my LIST!" />
+      <input
+        id="newEventBtn"
+        class="btn"
+        type="submit"
+        value="CREATE REMINDER"
+      />
     </form>
   </div>
 </template>
@@ -75,9 +80,18 @@ export default {
 <style scoped>
 .event-form {
   display: inline-block;
-  border: 1px solid black;
+  border: 4px solid rgb(46, 46, 46);
   border-radius: 5px;
   width: 60vw;
   padding: 10px;
+  background-color: rgb(145, 149, 153);
+  color: white;
+  font-weight: bold;
+}
+#newEventBtn {
+  font-size: 12px;
+}
+#newEventHeading {
+  font-size: 28px;
 }
 </style>

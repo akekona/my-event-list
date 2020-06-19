@@ -13,6 +13,10 @@ export default new VueRouter({
       component: Login,
     },
     {
+      path: "/login",
+      component: Login,
+    },
+    {
       path: "/register",
       component: Register,
     },
@@ -21,5 +25,6 @@ export default new VueRouter({
       component: EventList,
     },
   ],
+
   mode: "history",
 });

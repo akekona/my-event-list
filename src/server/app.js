@@ -17,7 +17,6 @@ app.use(cors());
 
 async function validateUsername(username) {
   try {
-    // console.log("checking username");
     const userList = db
       .select("username")
       .table("users")
@@ -109,7 +108,6 @@ app.post("/api/users/", async (req, res) => {
         username: newUser.username,
         password: hashed,
       });
-      console.log(hashed);
       res.sendStatus(200);
     } else {
       console.error("Username already exists");

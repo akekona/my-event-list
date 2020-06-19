@@ -61,14 +61,13 @@ export default {
           location: this.location,
         };
         const eventId = this.event.event_id;
-        // console.log("event to update", updatedEvent);
         const updated = await axios.put(
           `${process.env.VUE_APP_API_BASE_URL}/api/events/${eventId}/`,
           updatedEvent
         );
         return updated;
       } catch (err) {
-        console.log("Error adding new event", err);
+        console.error("Error adding new event", err);
       }
     },
     async updateEventList() {
@@ -98,6 +97,7 @@ export default {
   transition: all 0.2s ease-in;
   padding: 10px;
   padding-bottom: 25px;
+  font-weight: bold;
 }
 .overlay {
   background-color: rgba(95, 95, 95, 0.432);

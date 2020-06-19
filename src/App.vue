@@ -25,6 +25,22 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+html {
+  background-color: rgb(255, 255, 255);
+}
+
+.btn {
+  background-color: white;
+  color: black;
+  border-radius: 2px;
+  border: gray solid 4px;
+  font-weight: bold;
+  outline: none;
+  padding: 3px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #cccccc;
 }
 </style>

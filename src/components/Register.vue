@@ -30,9 +30,15 @@
         id="password"
         name="password"
       /><br /><br />
-      <input type="submit" value="Register" />
+      <input class="btn" type="submit" value="REGISTER" />
     </form>
     <br />
+    <p class="errorMsg userNameTaken" v-if="userNameTaken === true">
+      Username taken. Please select a different username.
+    </p>
+    <p class="errorMsg registerError" v-if="registerError === true">
+      Error registering new user. Please try again.
+    </p>
     <router-link to="/">Login</router-link>
   </div>
 </template>
@@ -46,6 +52,8 @@ export default {
       lastName: "",
       username: "",
       password: "",
+      userNameTaken: false,
+      registerError: false,
     };
   },
   methods: {
@@ -56,8 +64,13 @@ export default {
         username: this.username,
         password: this.password,
       };
-      const registered = await this.$store.dispatch("register", { newUser });
-      if (registered) {
+      const statusCode = await this.$store.dispatch("register", { newUser });
+      if (statusCode === 409) {
+        this.registerError = false;
+        this.userNameTaken = true;
+      } else if (statusCode === 200) {
+        this.userNameTaken = false;
+        this.registerError = false;
         const username = newUser.username;
         const password = newUser.password;
         const success = await this.$store.dispatch("login", {
@@ -67,6 +80,9 @@ export default {
         if (success) {
           this.$router.push("/events");
         }
+      } else {
+        this.userNameTaken = false;
+        this.registerError = true;
       }
     },
   },
@@ -82,5 +98,11 @@ export default {
   border-radius: 5px;
   width: 60vw;
   padding: 10px;
+  background-color: rgb(46, 46, 46);
+  color: white;
+  font-weight: bold;
+}
+.errorMsg {
+  color: rgb(197, 12, 12);
 }
 </style>

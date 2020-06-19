@@ -1,27 +1,30 @@
 <template>
   <div class="login">
-    <form class="login-form" @submit.prevent="login">
-      <label for="username">Username:</label>
-      <input
-        title="Username must be unique"
-        type="text"
-        v-model="username"
-        id="username"
-        name="username"
-      /><br />
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        v-model="password"
-        id="password"
-        name="password"
-      /><br />
-      <input type="submit" value="Login" />
-    </form>
-    <router-link to="/register">Register</router-link>
+    <h2>Welcome</h2>
+    <div class="loginFormContainer">
+      <form class="loginForm" @submit.prevent="login">
+        <label for="username">Username:</label>
+        <input
+          title="Username must be unique"
+          type="text"
+          v-model="username"
+          id="username"
+          name="username"
+        /><br />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          v-model="password"
+          id="password"
+          name="password"
+        /><br />
+        <input id="loginBtn" class="btn" type="submit" value="LOGIN" />
+      </form>
+    </div>
     <p class="loginError" v-if="incorrectLoginCredentials === true">
       Username or password is incorrect. Please try again.
     </p>
+    <router-link class="registerLink" to="/register">Register</router-link>
   </div>
 </template>
 
@@ -65,17 +68,27 @@ input {
   box-sizing: border-box;
   align-items: right;
 }
-.login {
+.loginFormContainer {
   border: 1px solid black;
   border-radius: 5px;
-  display: inline-block;
   width: 60vw;
   padding: 10px;
+  background-color: rgb(46, 46, 46);
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
-.login-form {
-  margin: 5px;
+.login {
+  display: inline-block;
+}
+.loginForm {
+  margin: 10px;
 }
 .loginError {
   color: rgb(197, 12, 12);
+}
+#loginBtn {
+  margin-top: 25px;
 }
 </style>

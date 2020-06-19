@@ -1,16 +1,18 @@
 <template>
   <div class="eventList">
     <NewEvent />
-    <h1>Upcoming Events</h1>
-    <div v-if="eventList.length === 0">
-      <p>There are currently no events in your EVENT LIST.</p>
-      <p>Add a new event reminder to get started!</p>
+    <div class="upcomingEvents">
+      <h1 id="eventListHeading">UPCOMING EVENTS...</h1>
+      <div v-if="eventList.length === 0">
+        <p>There are currently no events in your EVENT LIST.</p>
+        <p>Add a new event reminder to get started!</p>
+      </div>
+      <EventCard
+        v-for="event in eventList"
+        :key="event.event_id"
+        :event="event"
+      />
     </div>
-    <EventCard
-      v-for="event in eventList"
-      :key="event.event_id"
-      :event="event"
-    />
   </div>
 </template>
 
@@ -30,10 +32,14 @@ export default {
   methods: {
     retrieveEvents() {
       this.$store.dispatch("retrieveEvents").then(() => {
-        // console.log(this.$store.state.eventList);
         this.eventList = this.$store.state.eventList;
       });
     },
+  },
+  beforeCreate() {
+    if (!this.$store.state.loggedIn || this.$store.state.loggedIn === null) {
+      this.$router.push("/");
+    }
   },
   beforeMount() {
     this.retrieveEvents();
@@ -41,4 +47,17 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#eventListHeading {
+  font-size: 28px;
+}
+.upcomingEvents {
+  margin: 10px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 4px;
+}
+</style>

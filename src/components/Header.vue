@@ -1,13 +1,18 @@
 <template>
   <div class="header">
-    <button id="logoutBtn" @click="logout">Logout</button>
+    <button v-if="loggedIn === true" id="logoutBtn" @click="logout">
+      LOGOUT
+    </button>
     <h1 id="title">my EVENT LIST</h1>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "Header",
+  computed: mapState(["loggedIn"]),
   methods: {
     logout() {
       this.$store.dispatch("logout");
@@ -36,6 +41,12 @@ export default {
   margin-right: 10px;
   width: 10vw;
   height: 40px;
-  font-size: 15px;
+  font-size: 15px auto;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(46, 46, 46);
+  border-radius: 3px;
+  color: white;
+  font-weight: 300;
 }
 </style>

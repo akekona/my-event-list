@@ -7,7 +7,8 @@ View the live demo here: [LINK to My EVENT LIST](https://myevent-list.herokuapp.
 ## About
 
 A single page application to add, view, edit, and remove personal event reminders created by the user.  
-Login feature implemented using vuex state management and session storage.
+A login feature was implemented using vuex state management and session storage.  
+Password encrypted using [bcryptjs](https://www.npmjs.com/package/bcryptjs).
 
 ## API Endpoints
 
@@ -31,4 +32,5 @@ Login feature implemented using vuex state management and session storage.
 - [Knex](http://knexjs.org/)
 - [Express](https://expressjs.com/)
 - [Postgresql](https://www.postgresql.org/docs/)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - [Heroku](https://heroku.com/)

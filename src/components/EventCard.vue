@@ -4,11 +4,11 @@
     <h3 id="time">{{ displayTime }}</h3>
     <h2 id="eventName">{{ event.event_name }}</h2>
     <h3 id="location">{{ event.location }}</h3>
-    <button @click="toggleEditView">
+    <button class="btn" @click="toggleEditView">
       <span v-if="editting === false">Edit</span>
       <span v-else-if="editting === true">Editting</span>
     </button>
-    <button @click="updateAfterDelete">Remove</button>
+    <button class="btn" @click="updateAfterDelete">Remove</button>
     <UpdatedEvent
       v-if="editting === true"
       :editting="editting"
@@ -71,17 +71,25 @@ export default {
 
 <style scoped>
 .eventCard {
-  border: 1px solid black;
+  border: 3px solid gray;
   border-radius: 5px;
   margin: 7px;
   margin-bottom: 5px;
   padding: 7px;
   display: inline-block;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(176, 239, 252),
+    rgb(113, 177, 238)
+  );
 }
 button {
   margin: 7px;
   width: 80px;
   box-sizing: border-box;
   align-items: right;
+}
+#eventName {
+  color: white;
 }
 </style>
