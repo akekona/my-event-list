@@ -1,13 +1,14 @@
 <template>
   <div class="register">
     <h2>Create an account</h2>
-    <form class="register-form" @submit.prevent="register">
+    <form class="register-form" @submit.prevent="processRegistration">
       <label for="firstName">First name:</label>
       <input
         type="text"
         v-model="firstName"
         id="firstName"
         name="firstName"
+        required
       /><br />
       <label for="lastName">Last name:</label>
       <input
@@ -15,6 +16,7 @@
         v-model="lastName"
         id="lastName"
         name="username"
+        required
       /><br />
       <label for="username">Username:</label>
       <input
@@ -22,6 +24,7 @@
         v-model="username"
         id="username"
         name="username"
+        required
       /><br />
       <label for="password">Password:</label>
       <input
@@ -29,6 +32,7 @@
         v-model="password"
         id="password"
         name="password"
+        required
       /><br /><br />
       <input class="btn" type="submit" value="REGISTER" />
     </form>
@@ -38,6 +42,9 @@
     </p>
     <p class="errorMsg registerError" v-if="registerError === true">
       Error registering new user. Please try again.
+    </p>
+    <p class="errorMsg includesSpaces" v-if="includesSpaces === true">
+      Fields may not contain spaces. Please try again.
     </p>
     <router-link to="/">Login</router-link>
   </div>
@@ -54,9 +61,33 @@ export default {
       password: "",
       userNameTaken: false,
       registerError: false,
+      includesSpaces: false,
     };
   },
   methods: {
+    checkFields() {
+      this.includesSpaces = false;
+      const fields = [
+        this.firstName,
+        this.lastName,
+        this.username,
+        this.password,
+      ];
+      fields.forEach((inputField) => {
+        if (/\s/.test(inputField)) {
+          this.includesSpaces = true;
+        }
+      });
+      return this.includesSpaces;
+    },
+    async processRegistration() {
+      this.checkFields();
+      if (this.includesSpaces) {
+        return;
+      } else {
+        this.register();
+      }
+    },
     async register() {
       const newUser = {
         firstName: this.firstName,

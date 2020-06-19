@@ -10,6 +10,7 @@
           v-model="username"
           id="username"
           name="username"
+          required
         /><br />
         <label for="password">Password:</label>
         <input
@@ -17,6 +18,7 @@
           v-model="password"
           id="password"
           name="password"
+          required
         /><br />
         <input id="loginBtn" class="btn" type="submit" value="LOGIN" />
       </form>
