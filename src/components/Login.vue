@@ -19,6 +19,9 @@
       <input type="submit" value="Login" />
     </form>
     <router-link to="/register">Register</router-link>
+    <p class="loginError" v-if="incorrectLoginCredentials === true">
+      Username or password is incorrect. Please try again.
+    </p>
   </div>
 </template>
 
@@ -29,6 +32,7 @@ export default {
     return {
       username: "",
       password: "",
+      incorrectLoginCredentials: false,
     };
   },
   methods: {
@@ -41,6 +45,8 @@ export default {
       });
       if (success) {
         this.$router.push("/events");
+      } else {
+        this.incorrectLoginCredentials = true;
       }
     },
   },
@@ -68,5 +74,8 @@ input {
 }
 .login-form {
   margin: 5px;
+}
+.loginError {
+  color: rgb(197, 12, 12);
 }
 </style>

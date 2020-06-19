@@ -2,6 +2,7 @@ const express = require("express");
 const serveStatic = require("serve-static");
 const path = require("path");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcryptjs");
 var cors = require("cors");
 const db = require("./knex");
 
@@ -99,23 +100,21 @@ app.post("/api/events/:id/", async (req, res) => {
 app.post("/api/users/", async (req, res) => {
   try {
     const newUser = req.body;
-    console.log("server post", newUser);
-    validateUsername(newUser.username).then((userList) => {
-      if (!userList || userList.length === 0) {
-        const user = db("users").insert({
-          first_name: newUser.firstName,
-          last_name: newUser.lastName,
-          username: newUser.username,
-          password: newUser.password,
-        });
-        return user.then((user) => {
-          res.send(user);
-        });
-      } else {
-        console.error("Username already exists");
-        res.sendStatus(409);
-      }
-    });
+    const usersWithSameUsername = await validateUsername(newUser.username);
+    if (!usersWithSameUsername || usersWithSameUsername.length === 0) {
+      const hashed = await bcrypt.hash(newUser.password, 10);
+      await db("users").insert({
+        first_name: newUser.firstName,
+        last_name: newUser.lastName,
+        username: newUser.username,
+        password: hashed,
+      });
+      console.log(hashed);
+      res.sendStatus(200);
+    } else {
+      console.error("Username already exists");
+      res.sendStatus(409);
+    }
   } catch (err) {
     res.sendStatus(400);
     console.error("Error adding new user", err);

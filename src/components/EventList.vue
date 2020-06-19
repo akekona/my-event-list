@@ -1,6 +1,5 @@
 <template>
   <div class="eventList">
-    <button @click="logout">Logout</button>
     <NewEvent />
     <h1>Upcoming Events</h1>
     <div v-if="eventList.length === 0">
@@ -29,12 +28,6 @@ export default {
   computed: mapState(["eventList"]),
 
   methods: {
-    logout() {
-      this.$store.dispatch("logout");
-      if (!this.$store.state.loggedIn) {
-        this.$router.push("/");
-      }
-    },
     retrieveEvents() {
       this.$store.dispatch("retrieveEvents").then(() => {
         // console.log(this.$store.state.eventList);

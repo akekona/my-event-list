@@ -5,6 +5,7 @@ import persistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 const baseURL = process.env.VUE_APP_API_BASE_URL;
+const bcrypt = require("bcryptjs");
 
 export default new Vuex.Store({
   plugins: [
@@ -55,18 +56,18 @@ export default new Vuex.Store({
         const pass = credentials.password;
         const rawUser = await axios.get(`${baseURL}/api/users/${username}/`);
         const user = await rawUser.data[0];
-        console.log("in store login", user.password, pass);
-        if (user.password === pass) {
-          console.log("before commit");
+
+        const passwordMatch = bcrypt.compareSync(pass, user.password);
+        if (passwordMatch) {
           commit("setLoggedIn", true);
           commit("setUsername", user.username);
           commit("setUserId", user.user_id);
           commit("setFirstName", user.first_name);
           commit("setLastName", user.last_name);
-          return true;
         } else {
           console.error("Password incorrect");
         }
+        return passwordMatch;
       } catch (err) {
         console.error("Error logging in", err);
       }
